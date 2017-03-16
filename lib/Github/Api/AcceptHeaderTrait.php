@@ -9,7 +9,8 @@ namespace Github\Api;
  */
 trait AcceptHeaderTrait
 {
-    protected $acceptHeaderValue = null;
+    // NOTE: I (kurt) made this change as the configure call was not working. I followed documentation but never worked.
+    protected $acceptHeaderValue = 'application/vnd.github.inertia-preview+json';
 
     protected function get($path, array $parameters = array(), array $requestHeaders = array())
     {
