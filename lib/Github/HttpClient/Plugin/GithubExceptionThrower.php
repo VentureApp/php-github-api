@@ -51,10 +51,10 @@ class GithubExceptionThrower implements Plugin
                     throw new ErrorException($content['message'], 400);
                 } elseif (422 == $response->getStatusCode() && isset($content['errors'])) {
                     $errors = array();
-                    if (!is_array($content['errors'])) {
-                        throw new ValidationFailedException('Validation Failed: '.$content['errors'], 422);
-                    }
                     foreach ($content['errors'] as $error) {
+                    if (!is_array($error)) {
+                        throw new ValidationFailedException('Validation Failed: ' . $error, 422);
+                    }
                         switch ($error['code']) {
                             case 'missing':
                                 $errors[] = sprintf('The %s %s does not exist, for resource "%s"', $error['field'], $error['value'], $error['resource']);
